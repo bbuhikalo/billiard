@@ -119,6 +119,9 @@ body {
 .nav-links a:hover { color: var(--gold); }
 .nav-links a:hover::after { right: 0; }
 
+.nav-links a.active-link { color: var(--gold); }
+.nav-links a.active-link::after { right: 0; }
+
 .nav-cta {
   font-size: 12px;
   font-weight: 600;
@@ -776,6 +779,9 @@ h2 em { font-style: italic; color: var(--gold); }
 .hours-row:last-child td { border-bottom: none; }
 
 .open-now td { color: var(--gold) !important; }
+.closed-now td { color: var(--text-muted) !important; }
+.closed-now #open-label::before { content: '● '; color: #8a4a3a; }
+.open-now #open-label::before { content: '● '; color: #5CAA60; }
 
 /* CONTACT FORM */
 .contact-form-wrap {
@@ -901,6 +907,38 @@ footer {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Gentle glow pulse on the booking phone number */
+.phone-link {
+  animation: phoneGlow 4s ease-in-out infinite;
+}
+
+@keyframes phoneGlow {
+  0%, 100% { text-shadow: 0 0 0 rgba(201,168,76,0); }
+  50% { text-shadow: 0 0 24px rgba(201,168,76,0.35); }
+}
+
+/* Shimmer sweep across VIP crown icons */
+.vip-crown svg path {
+  animation: crownShimmer 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes crownShimmer {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 0 transparent); fill-opacity: 0.1; }
+  50% { filter: brightness(1.4) drop-shadow(0 0 6px currentColor); fill-opacity: 0.3; }
+}
+
+/* Subtle breathing glow on the logo mark */
+.logo-v {
+  display: inline-block;
+  animation: logoGlow 5s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% { text-shadow: 0 0 0 rgba(201,168,76,0); }
+  50% { text-shadow: 0 0 14px rgba(201,168,76,0.6); }
 }
 
 [data-animate="fade-up"],
