@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RACK — Більярдний клуб</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8A6E32;
+    --bg-dark: #0D0D0E;
+    --bg-card: #131416;
+    --bg-surface: #1A1B1E;
+    --text-primary: #F0EDE6;
+    --text-secondary: #9B9690;
+    --text-muted: #5A5650;
+    --border: rgba(201,168,76,0.18);
+    --border-subtle: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 72px;
+    background: rgba(13,13,14,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid var(--border-subtle);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--bg-dark);
+    background: var(--gold);
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .hero-table-illustration {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54%;
+    opacity: 0.18;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 580px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bg-dark);
+    background: var(--gold);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-ghost {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: none;
+    border: 0.5px solid var(--text-muted);
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 0.5px solid var(--border-subtle);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 5vw; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 48px;
+  }
+
+  h2 em { font-style: italic; color: var(--gold); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 0.5px;
+    background: var(--border-subtle);
+    margin: 0 5vw;
+    width: calc(100% - 10vw);
+  }
+
+  /* ── TABLES SECTION ── */
+  .tables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 0.5px solid var(--border-subtle);
+  }
+
+  .table-card {
+    background: var(--bg-card);
+    padding: 32px 28px;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .table-card:hover { background: var(--bg-surface); }
+
+  .table-card.featured {
+    background: var(--bg-surface);
+    border-left: 2px solid var(--gold);
+  }
+
+  .table-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    padding: 4px 10px;
+    margin-bottom: 20px;
+  }
+
+  .table-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .table-tables {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--border-subtle);
+  }
+  .price-row:last-of-type { border-bottom: none; }
+
+  .price-time {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .price-value span {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 3px;
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .service-item {
+    padding: 32px 24px;
+    border: 0.5px solid var(--border-subtle);
+    background: var(--bg-card);
+    transition: border-color 0.2s;
+  }
+  .service-item:hover { border-color: var(--border); }
+
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+
+  .service-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* ── HALL MAP ── */
+  .hall-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .hall-section { grid-template-columns: 1fr; }
+    .hero-table-illustration { display: none; }
+    .nav-links { display: none; }
+  }
+
+  .hall-map-svg {
+    width: 100%;
+    border: 0.5px solid var(--border-subtle);
+    background: var(--bg-card);
+  }
+
+  .hall-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+  }
+
+  .hall-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hall-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .hall-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .hall-list-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .hall-list-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── SCHOOL ── */
+  .coaches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .coach-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border-subtle);
+    padding: 32px 24px;
+    transition: border-color 0.2s;
+  }
+  .coach-card:hover { border-color: var(--border); }
+
+  .coach-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--bg-dark);
+    margin-bottom: 16px;
+  }
+
+  .coach-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .coach-title {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .coach-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── BOOKING BAND ── */
+  .booking-band {
+    background: var(--bg-surface);
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 72px 5vw;
+    text-align: center;
+  }
+
+  .booking-band h2 { margin-bottom: 12px; text-align: center; }
+
+  .booking-band p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+  }
+
+  .booking-band .phone {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--gold);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 32px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── CONTACTS ── */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .contacts-grid { grid-template-columns: 1fr; }
+  }
+
+  .contact-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .contact-icon {
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+
+  .contact-value {
+    font-size: 15px;
+    color: var(--text-primary);
+  }
+
+  .contact-value a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-value a:hover { color: var(--gold); }
+
+  .hours-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .hours-table td {
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--border-subtle);
+    font-size: 14px;
+  }
+
+  .hours-table td:last-child {
+    text-align: right;
+    color: var(--text-secondary);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 5vw;
+    border-top: 0.5px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── GOLD LINE ACCENT ── */
+  .gold-line {
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  /* ── TABLE SVG POOL ── */
+  .pool-table-svg rect { rx: 4; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">RACK</a>
+  <ul class="nav-links">
+    <li><a href="#prices">Ціни</a></li>
+    <li><a href="#hall">Зал</a></li>
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#school">Школа</a></li>
+    <li><a href="#contacts">Контакти</a></li>
+  </ul>
+  <a class="nav-cta" href="#booking">Забронювати стіл</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- SVG billiard table illustration -->
+  <svg class="hero-table-illustration" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="20" width="560" height="300" rx="16" fill="#1a1a0e" stroke="#C9A84C" stroke-width="12"/>
+    <rect x="48" y="48" width="504" height="244" rx="8" fill="#1B4D1F"/>
+    <!-- pockets -->
+    <circle cx="48" cy="48" r="14" fill="#0D0D0E"/>
+    <circle cx="300" cy="48" r="11" fill="#0D0D0E"/>
+    <circle cx="552" cy="48" r="14" fill="#0D0D0E"/>
+    <circle cx="48" cy="292" r="14" fill="#0D0D0E"/>
+    <circle cx="300" cy="292" r="11" fill="#0D0D0E"/>
+    <circle cx="552" cy="292" r="14" fill="#0D0D0E"/>
+    <!-- center line -->
+    <line x1="300" y1="58" x2="300" y2="282" stroke="#2a6e2e" stroke-width="1"/>
+    <!-- center circle -->
+    <circle cx="300" cy="170" r="28" stroke="#2a6e2e" stroke-width="1" fill="none"/>
+    <!-- balls -->
+    <circle cx="180" cy="170" r="10" fill="#F0EDE6"/>
+    <circle cx="380" cy="155" r="10" fill="#E8C97A"/>
+    <circle cx="400" cy="175" r="10" fill="#C9A84C" opacity="0.8"/>
+    <circle cx="395" cy="195" r="10" fill="#E8C97A" opacity="0.6"/>
+    <circle cx="420" cy="162" r="10" fill="#8A6E32"/>
+    <circle cx="418" cy="185" r="10" fill="#C9A84C" opacity="0.5"/>
+    <!-- cue line suggestion -->
+    <line x1="80" y1="170" x2="165" y2="170" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Більярдний клуб Київ</p>
+    <h1>Мистецтво<br>точного <em>удару</em></h1>
+    <p class="hero-sub">20 столів преміум-класу, школа гри, VIP-зони та ресторан. Місце, де збираються справжні цінителі більярду.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#booking">Забронювати стіл</a>
+      <a class="btn-ghost" href="#prices">Переглянути ціни</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">20</div>
+        <div class="stat-label">Столів</div>
+      </div>
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Без вихідних</div>
+      </div>
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Років досвіду</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICES -->
+<section id="prices">
+  <div class="section-eyebrow">Прайс-лист</div>
+  <h2>Ціни на <em>ігрові столи</em></h2>
+
+  <div class="tables-grid">
+
+    <div class="table-card">
+      <div class="table-badge">Піраміда</div>
+      <div class="table-name">Стандарт</div>
+      <div class="table-tables">Столи № 2, 3, 4, 5, 6, 7</div>
+      <div class="price-row">
+        <span class="price-time">11:00 — 17:00</span>
+        <span class="price-value">222<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">17:00 — 06:00</span>
+        <span class="price-value">222<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">Пт–Сб вечір</span>
+        <span class="price-value">222<span>грн/год</span></span>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-badge">Піраміда 12ft</div>
+      <div class="table-name">Преміум</div>
+      <div class="table-tables">Столи № 1, 8, 9, 10</div>
+      <div class="price-row">
+        <span class="price-time">11:00 — 17:00</span>
+        <span class="price-value">234<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">17:00 — 06:00</span>
+        <span class="price-value">234<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">Пт–Сб вечір</span>
+        <span class="price-value">234<span>грн/год</span></span>
+      </div>
+    </div>
+
+    <div class="table-card featured">
+      <div class="table-badge">VIP · Піраміда</div>
+      <div class="table-name">VIP-зал</div>
+      <div class="table-tables">Столи № 11, 12, 13, 14</div>
+      <div class="price-row">
+        <span class="price-time">11:00 — 17:00</span>
+        <span class="price-value">276<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">17:00 — 06:00</span>
+        <span class="price-value">276<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">Пт–Сб вечір</span>
+        <span class="price-value">276<span>грн/год</span></span>
+      </div>
+    </div>
+
+    <div class="table-card featured">
+      <div class="table-badge">VIP · Ложа</div>
+      <div class="table-name">Приватна ложа</div>
+      <div class="table-tables">Стіл № 16</div>
+      <div class="price-row">
+        <span class="price-time">11:00 — 17:00</span>
+        <span class="price-value">390<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">17:00 — 06:00</span>
+        <span class="price-value">390<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">Пт–Сб вечір</span>
+        <span class="price-value">500<span>грн/год</span></span>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-badge">Пул · Жетон</div>
+      <div class="table-name">Пул 7ft</div>
+      <div class="table-tables">Столи № 19, 20</div>
+      <div class="price-row">
+        <span class="price-time">11:00 — 06:00</span>
+        <span class="price-value">50<span>грн/жет</span></span>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-badge">Пул VIP · 9ft</div>
+      <div class="table-name">Пул VIP</div>
+      <div class="table-tables">Стіл № 15</div>
+      <div class="price-row">
+        <span class="price-time">11:00 — 17:00</span>
+        <span class="price-value">222<span>грн/год</span></span>
+      </div>
+      <div class="price-row">
+        <span class="price-time">17:00 — 06:00</span>
+        <span class="price-value">222<span>грн/год</span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HALL MAP -->
+<section id="hall">
+  <div class="section-eyebrow">Планування залу</div>
+  <h2>Карта <em>клубу</em></h2>
+
+  <div class="hall-section">
+    <!-- SVG Floor Plan -->
+    <svg class="hall-map-svg" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="360" fill="#131416"/>
+      <!-- outer walls -->
+      <rect x="16" y="16" width="468" height="328" rx="2" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+
+      <!-- zone labels -->
+      <text x="250" y="38" text-anchor="middle" fill="#5A5650" font-size="9" font-family="Inter" letter-spacing="2" text-transform="uppercase">ВХІД</text>
+
+      <!-- Standard tables zone -->
+      <text x="80" y="68" fill="#5A5650" font-size="8" font-family="Inter" letter-spacing="1.5">СТАНДАРТ</text>
+      <!-- 6 tables 2-7 -->
+      <rect x="30" y="76" width="52" height="30" rx="2" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="56" y="95" text-anchor="middle" fill="#5CAA60" font-size="8" font-family="Inter">2</text>
+      <rect x="92" y="76" width="52" height="30" rx="2" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="118" y="95" text-anchor="middle" fill="#5CAA60" font-size="8" font-family="Inter">3</text>
+      <rect x="30" y="116" width="52" height="30" rx="2" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="56" y="135" text-anchor="middle" fill="#5CAA60" font-size="8" font-family="Inter">4</text>
+      <rect x="92" y="116" width="52" height="30" rx="2" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="118" y="135" text-anchor="middle" fill="#5CAA60" font-size="8" font-family="Inter">5</text>
+      <rect x="30" y="156" width="52" height="30" rx="2" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="56" y="175" text-anchor="middle" fill="#5CAA60" font-size="8" font-family="Inter">6</text>
+      <rect x="92" y="156" width="52" height="30" rx="2" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="118" y="175" text-anchor="middle" fill="#5CAA60" font-size="8" font-family="Inter">7</text>
+
+      <!-- Premium zone -->
+      <text x="185" y="68" fill="#5A5650" font-size="8" font-family="Inter" letter-spacing="1.5">ПРЕМІУМ</text>
+      <rect x="165" y="76" width="58" height="34" rx="2" fill="#1A2E1F" stroke="#3a8a3e" stroke-width="0.5"/>
+      <text x="194" y="97" text-anchor="middle" fill="#7CC280" font-size="9" font-family="Inter">1</text>
+      <rect x="233" y="76" width="58" height="34" rx="2" fill="#1A2E1F" stroke="#3a8a3e" stroke-width="0.5"/>
+      <text x="262" y="97" text-anchor="middle" fill="#7CC280" font-size="9" font-family="Inter">8</text>
+      <rect x="165" y="120" width="58" height="34" rx="2" fill="#1A2E1F" stroke="#3a8a3e" stroke-width="0.5"/>
+      <text x="194" y="141" text-anchor="middle" fill="#7CC280" font-size="9" font-family="Inter">9</text>
+      <rect x="233" y="120" width="58" height="34" rx="2" fill="#1A2E1F" stroke="#3a8a3e" stroke-width="0.5"/>
+      <text x="262" y="141" text-anchor="middle" fill="#7CC280" font-size="9" font-family="Inter">10</text>
+
+      <!-- VIP zone -->
+      <rect x="300" y="58" width="168" height="140" rx="3" fill="#1A1600" stroke="#C9A84C" stroke-width="0.8"/>
+      <text x="384" y="78" text-anchor="middle" fill="#8A6E32" font-size="8" font-family="Inter" letter-spacing="1.5">VIP</text>
+      <rect x="312" y="86" width="60" height="36" rx="2" fill="#2A2000" stroke="#C9A84C" stroke-width="0.5"/>
+      <text x="342" y="108" text-anchor="middle" fill="#C9A84C" font-size="9" font-family="Inter">11</text>
+      <rect x="383" y="86" width="60" height="36" rx="2" fill="#2A2000" stroke="#C9A84C" stroke-width="0.5"/>
+      <text x="413" y="108" text-anchor="middle" fill="#C9A84C" font-size="9" font-family="Inter">12</text>
+      <rect x="312" y="132" width="60" height="36" rx="2" fill="#2A2000" stroke="#C9A84C" stroke-width="0.5"/>
+      <text x="342" y="154" text-anchor="middle" fill="#C9A84C" font-size="9" font-family="Inter">13</text>
+      <rect x="383" y="132" width="60" height="36" rx="2" fill="#2A2000" stroke="#C9A84C" stroke-width="0.5"/>
+      <text x="413" y="154" text-anchor="middle" fill="#C9A84C" font-size="9" font-family="Inter">14</text>
+
+      <!-- VIP Lounge table 16 -->
+      <rect x="300" y="215" width="168" height="70" rx="3" fill="#1F1200" stroke="#E8C97A" stroke-width="1"/>
+      <text x="384" y="234" text-anchor="middle" fill="#8A6E32" font-size="8" font-family="Inter" letter-spacing="1.5">VIP ЛОЖА</text>
+      <rect x="340" y="240" width="88" height="36" rx="2" fill="#2A1A00" stroke="#E8C97A" stroke-width="0.8"/>
+      <text x="384" y="262" text-anchor="middle" fill="#E8C97A" font-size="10" font-family="Inter">16</text>
+
+      <!-- Tables 17,18 -->
+      <text x="80" y="218" fill="#5A5650" font-size="8" font-family="Inter" letter-spacing="1.5">ПІД'ЄДНАНІ</text>
+      <rect x="30" y="226" width="58" height="36" rx="2" fill="#1B2E1F" stroke="#4a9a4e" stroke-width="0.5"/>
+      <text x="59" y="248" text-anchor="middle" fill="#7CC280" font-size="9" font-family="Inter">17</text>
+      <rect x="98" y="226" width="58" height="36" rx="2" fill="#1B2E1F" stroke="#4a9a4e" stroke-width="0.5"/>
+      <text x="127" y="248" text-anchor="middle" fill="#7CC280" font-size="9" font-family="Inter">18</text>
+
+      <!-- Pool VIP table 15 -->
+      <rect x="165" y="200" width="120" height="50" rx="3" fill="#001A1F" stroke="#4A9AAA" stroke-width="0.8"/>
+      <text x="225" y="218" text-anchor="middle" fill="#3A7A8A" font-size="8" font-family="Inter" letter-spacing="1.5">ПУЛ VIP 9ft</text>
+      <text x="225" y="236" text-anchor="middle" fill="#5ABACA" font-size="10" font-family="Inter">15</text>
+
+      <!-- Pool tables 19,20 -->
+      <rect x="165" y="265" width="55" height="30" rx="2" fill="#001020" stroke="#3A6A9A" stroke-width="0.5"/>
+      <text x="193" y="284" text-anchor="middle" fill="#5A8ACA" font-size="9" font-family="Inter">19</text>
+      <rect x="230" y="265" width="55" height="30" rx="2" fill="#001020" stroke="#3A6A9A" stroke-width="0.5"/>
+      <text x="258" y="284" text-anchor="middle" fill="#5A8ACA" font-size="9" font-family="Inter">20</text>
+      <text x="193" y="308" text-anchor="middle" fill="#5A5650" font-size="7" font-family="Inter" letter-spacing="1">ПУЛ 7ft</text>
+
+      <!-- Bar area -->
+      <rect x="30" y="290" width="120" height="44" rx="2" fill="#140A00" stroke="#6A4A2A" stroke-width="0.5"/>
+      <text x="90" y="316" text-anchor="middle" fill="#6A4A2A" font-size="9" font-family="Inter" letter-spacing="1">БАР / РЕСТОРАН</text>
+
+      <!-- Legend -->
+      <rect x="30" y="340" width="10" height="6" rx="1" fill="#1B3A1D" stroke="#2a6e2e" stroke-width="0.5"/>
+      <text x="45" y="347" fill="#5A5650" font-size="7" font-family="Inter">Піраміда</text>
+      <rect x="105" y="340" width="10" height="6" rx="1" fill="#1A1600" stroke="#C9A84C" stroke-width="0.5"/>
+      <text x="120" y="347" fill="#5A5650" font-size="7" font-family="Inter">VIP</text>
+      <rect x="155" y="340" width="10" height="6" rx="1" fill="#001A1F" stroke="#4A9AAA" stroke-width="0.5"/>
+      <text x="170" y="347" fill="#5A5650" font-size="7" font-family="Inter">Пул</text>
+    </svg>
+
+    <div class="hall-info">
+      <h3>Про наш зал</h3>
+      <span class="gold-line"></span>
+      <ul class="hall-list">
+        <li>
+          <div class="hall-dot" style="background: #5CAA60;"></div>
+          <div>
+            <div class="hall-list-title">Піраміда 12ft — Столи 2–7, 17, 18</div>
+            <div class="hall-list-sub">Стандартна зона. Професійне сукно Iwan Simonis, точна рейкова підвіска</div>
+          </div>
+        </li>
+        <li>
+          <div class="hall-dot" style="background: #7CC280;"></div>
+          <div>
+            <div class="hall-list-title">Піраміда Преміум — Столи 1, 8–10</div>
+            <div class="hall-list-sub">Розширена зона з поліпшеним освітленням і зручнішими кріслами</div>
+          </div>
+        </li>
+        <li>
+          <div class="hall-dot" style="background: #C9A84C;"></div>
+          <div>
+            <div class="hall-list-title">VIP-зал — Столи 11–14</div>
+            <div class="hall-list-sub">Ізольована зона, персональний стюард, відмінна акустика</div>
+          </div>
+        </li>
+        <li>
+          <div class="hall-dot" style="background: #E8C97A;"></div>
+          <div>
+            <div class="hall-list-title">VIP Ложа — Стіл 16</div>
+            <div class="hall-list-sub">Повністю приватна кімната з баром та можливістю корпоративних заходів</div>
+          </div>
+        </li>
+        <li>
+          <div class="hall-dot" style="background: #5ABACA;"></div>
+          <div>
+            <div class="hall-list-title">Пул 9ft VIP — Стіл 15 | Пул 7ft — Столи 19, 20</div>
+            <div class="hall-list-sub">Американський пул для любителів класичної гри</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-eyebrow">Що ми пропонуємо</div>
+  <h2>Наші <em>послуги</em></h2>
+
+  <div class="services-grid">
+    <div class="service-item">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="32" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="14" cy="20" r="3" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="20" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="4" y1="14" x2="36" y2="14" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.4"/>
+      </svg>
+      <div class="service-title">Бонусна система</div>
+      <div class="service-desc">Накопичуйте бали за кожну годину гри та отримуйте безкоштовні сеанси й знижки на послуги клубу.</div>
+    </div>
+
+    <div class="service-item">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="6" width="28" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M13 20 L18 25 L27 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="service-title">Подарункові сертифікати</div>
+      <div class="service-desc">Ідеальний подарунок для тих, хто любить більярд. Доступні номіналом від 500 до 5000 гривень.</div>
+    </div>
+
+    <div class="service-item">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="14" r="5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 34 C8 26.268 13.373 22 20 22 C26.627 22 32 26.268 32 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="30" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M34 26 C34 22 32 20 30 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+      <div class="service-title">Корпоративний відпочинок</div>
+      <div class="service-desc">Організовуємо тімбілдинги, корпоративи та приватні турніри. VIP-ложа для груп до 20 осіб.</div>
+    </div>
+
+    <div class="service-item">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 32 L12 20 L20 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="20" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="30" cy="22" r="3" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="22" y1="10" x2="28" y2="20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+      </svg>
+      <div class="service-title">Магазин інвентарю</div>
+      <div class="service-desc">Кіі, кулі, крейди та аксесуари провідних брендів. Підберемо оптимальне спорядження для вашого рівня.</div>
+    </div>
+
+    <div class="service-item">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6 L22.5 14 L32 14 L25 19 L27.5 28 L20 23 L12.5 28 L15 19 L8 14 L17.5 14 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <div class="service-title">Турніри</div>
+      <div class="service-desc">Регулярні аматорські та профі-турніри з призовим фондом. Приєднуйтесь — незалежно від рівня майстерності.</div>
+    </div>
+
+    <div class="service-item">
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 34 L12 24 C12 22 16 18 20 18 C24 18 28 22 28 24 L28 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="20" cy="13" r="5" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="8" y1="34" x2="32" y2="34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-title">Ресторан і бар</div>
+      <div class="service-desc">Авторська кухня, широка карта вин і коктейлів. Замовляйте прямо до столу — доставка без очікування.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCHOOL -->
+<section id="school">
+  <div class="section-eyebrow">Школа більярду</div>
+  <h2>Навчіться грати <em>правильно</em></h2>
+
+  <div class="coaches-grid">
+    <div class="coach-card">
+      <div class="coach-avatar">АК</div>
+      <div class="coach-name">Андрій Ковальчук</div>
+      <div class="coach-title">Майстер спорту</div>
+      <div class="coach-desc">15 років тренерського досвіду. Чемпіон України 2014–2016 рр. Спеціалізація — руська піраміда та динамічна постановка удару.</div>
+    </div>
+
+    <div class="coach-card">
+      <div class="coach-avatar">ОС</div>
+      <div class="coach-name">Олена Семенова</div>
+      <div class="coach-title">КМС, тренер</div>
+      <div class="coach-desc">Кандидат у майстри спорту. Авторська методика навчання для початківців. Індивідуальні та групові заняття для дорослих і дітей.</div>
+    </div>
+
+    <div class="coach-card">
+      <div class="coach-avatar">ДМ</div>
+      <div class="coach-name">Дмитро Мартиненко</div>
+      <div class="coach-title">Гравець 1-го розряду</div>
+      <div class="coach-desc">Спеціалізується на пулі та снукері. Учасник міжнародних турнірів. Проводить корпоративні майстер-класи.</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px; padding: 32px; border: 0.5px solid var(--border); background: var(--bg-card); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+    <div>
+      <div class="section-eyebrow" style="margin-bottom: 8px;">Записатися на урок</div>
+      <p style="font-size: 15px; color: var(--text-secondary); max-width: 400px;">Перше пробне заняття — безкоштовно. Тренер оцінить ваш рівень і складе індивідуальну програму.</p>
+    </div>
+    <a class="btn-primary" href="#booking">Записатися</a>
+  </div>
+</section>
+
+<!-- BOOKING BAND -->
+<div class="booking-band" id="booking">
+  <div class="section-eyebrow" style="justify-content: center; margin-bottom: 16px;">Резервація столу</div>
+  <h2>Заброньовуйте стіл<br>просто зараз</h2>
+  <p>Дзвоніть або пишіть — підберемо зручний час і підготуємо стіл до вашого приходу</p>
+  <a class="phone" href="tel:+380442940757">(044) 294-07-57</a>
+  <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+    <a class="btn-primary" href="tel:+380442940757">Зателефонувати</a>
+    <a class="btn-ghost" href="#contacts">Написати нам</a>
+  </div>
+</div>
+
+<!-- CONTACTS -->
+<section id="contacts">
+  <div class="section-eyebrow">Як нас знайти</div>
+  <h2>Контакти та <em>розклад</em></h2>
+
+  <div class="contacts-grid">
+    <div class="contact-block">
+      <h3>Де ми знаходимось</h3>
+      <div class="contact-row">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+        </svg>
+        <div>
+          <div class="contact-label">Адреса</div>
+          <div class="contact-value">м. Київ, вул. Березняківська 36А</div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
+        </svg>
+        <div>
+          <div class="contact-label">Телефон</div>
+          <div class="contact-value"><a href="tel:+380442940757">(044) 294-07-57</a></div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+        </svg>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:info@rack.ua">info@rack.ua</a></div>
+        </div>
+      </div>
+
+      <!-- Map placeholder -->
+      <div style="margin-top: 32px; height: 200px; background: var(--bg-card); border: 0.5px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- simple stylized map -->
+          <rect width="400" height="200" fill="#0D0D0E"/>
+          <line x1="0" y1="100" x2="400" y2="100" stroke="#1a1a1e" stroke-width="18"/>
+          <line x1="200" y1="0" x2="200" y2="200" stroke="#1a1a1e" stroke-width="12"/>
+          <line x1="0" y1="60" x2="400" y2="60" stroke="#1a1a1e" stroke-width="8"/>
+          <line x1="0" y1="140" x2="400" y2="140" stroke="#1a1a1e" stroke-width="8"/>
+          <line x1="100" y1="0" x2="100" y2="200" stroke="#1a1a1e" stroke-width="6"/>
+          <line x1="300" y1="0" x2="300" y2="200" stroke="#1a1a1e" stroke-width="6"/>
+          <!-- blocks -->
+          <rect x="20" y="20" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <rect x="120" y="20" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <rect x="220" y="20" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <rect x="320" y="20" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <rect x="20" y="80" width="60" height="40" rx="2" fill="#1A1A1E"/>
+          <rect x="320" y="80" width="60" height="40" rx="2" fill="#1A1A1E"/>
+          <rect x="20" y="150" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <rect x="120" y="150" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <rect x="320" y="150" width="60" height="30" rx="2" fill="#1A1A1E"/>
+          <!-- our location pin -->
+          <circle cx="200" cy="100" r="16" fill="rgba(201,168,76,0.2)" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="200" cy="100" r="5" fill="#C9A84C"/>
+          <text x="200" y="130" text-anchor="middle" fill="#C9A84C" font-size="9" font-family="Inter" letter-spacing="1">RACK КЛУБ</text>
+          <text x="200" y="142" text-anchor="middle" fill="#5A5650" font-size="8" font-family="Inter">Березняківська 36А</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="contact-block">
+      <h3>Режим роботи</h3>
+      <table class="hours-table">
+        <tr>
+          <td>Понеділок — Четвер</td>
+          <td>11:00 — 06:00</td>
+        </tr>
+        <tr>
+          <td>П'ятниця</td>
+          <td>11:00 — 08:00</td>
+        </tr>
+        <tr>
+          <td>Субота</td>
+          <td>11:00 — 08:00</td>
+        </tr>
+        <tr>
+          <td>Неділя</td>
+          <td>11:00 — 06:00</td>
+        </tr>
+        <tr>
+          <td style="color: var(--gold);">Свята</td>
+          <td style="color: var(--gold);">Без вихідних</td>
+        </tr>
+      </table>
+
+      <div style="margin-top: 40px; padding: 28px; background: var(--bg-card); border: 0.5px solid var(--border);">
+        <div style="font-size: 13px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;">Написати нам</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <input type="text" placeholder="Ваше ім'я" style="background: var(--bg-dark); border: 0.5px solid var(--border-subtle); color: var(--text-primary); padding: 12px 16px; font-family: inherit; font-size: 14px; outline: none; width: 100%;">
+          <input type="tel" placeholder="Номер телефону" style="background: var(--bg-dark); border: 0.5px solid var(--border-subtle); color: var(--text-primary); padding: 12px 16px; font-family: inherit; font-size: 14px; outline: none; width: 100%;">
+          <textarea placeholder="Повідомлення" rows="4" style="background: var(--bg-dark); border: 0.5px solid var(--border-subtle); color: var(--text-primary); padding: 12px 16px; font-family: inherit; font-size: 14px; outline: none; resize: vertical; width: 100%;"></textarea>
+          <button class="btn-primary" style="width: 100%; cursor: pointer; font-family: inherit;">Надіслати</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">RACK</a>
+  <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+    <a href="#prices" style="font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Ціни</a>
+    <a href="#hall" style="font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Зал</a>
+    <a href="#school" style="font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Школа</a>
+    <a href="#contacts" style="font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Контакти</a>
+  </div>
+  <p class="footer-copy">© 2026 RACK Більярдний клуб. м. Київ</p>
+</footer>
+
+<script>
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 50 ? 'rgba(13,13,14,0.97)' : 'rgba(13,13,14,0.88)';
+  });
+
+  document.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('focus', () => el.style.borderColor = 'rgba(201,168,76,0.5)');
+    el.addEventListener('blur', () => el.style.borderColor = 'rgba(255,255,255,0.07)');
+  });
+
+  const btn = document.querySelector('.booking-band .btn-primary + .btn-ghost');
+</script>
+</body>
+</html>
