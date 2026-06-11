@@ -11,10 +11,8 @@
 </head>
 <body>
 
-<!-- CURSOR TRAIL -->
 <canvas id="cursor-canvas"></canvas>
 
-<!-- NAV -->
 <nav id="main-nav">
   <a class="nav-logo" href="#">
     <span class="logo-v">В</span><span class="logo-rest">ІКТОРІЯ</span>
@@ -22,186 +20,76 @@
   <ul class="nav-links">
     <li><a href="#prices">Ціни</a></li>
     <li><a href="#hall">Зал</a></li>
-    <li><a href="#contacts">Контакти</a></li>
+    <li><a href="#contacts">Бронювання</a></li>
   </ul>
-  <a class="nav-cta" href="#booking">Забронювати стіл</a>
-  <button class="burger" id="burger" aria-label="Меню">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#prices" class="mobile-link">Ціни</a>
-  <a href="#hall" class="mobile-link">Зал</a>
-  <a href="#contacts" class="mobile-link">Контакти</a>
-  <a href="#booking" class="mobile-link gold">Забронювати стіл</a>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-particles" id="particles"></div>
-
-  <!-- Animated billiard table SVG -->
-  <svg class="hero-table-illustration" id="hero-svg" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="20" y="20" width="560" height="300" rx="16" fill="#1a1a0e" stroke="#C9A84C" stroke-width="10"/>
-    <rect x="50" y="50" width="500" height="240" rx="8" fill="#1B4D1F"/>
-    <!-- diamond pattern on felt -->
-    <line x1="300" y1="58" x2="300" y2="282" stroke="#1f5a23" stroke-width="1" stroke-dasharray="3 6"/>
-    <circle cx="300" cy="170" r="32" stroke="#1f5a23" stroke-width="1" fill="none"/>
-    <!-- pockets -->
-    <circle cx="50" cy="50" r="14" fill="#0a0a0a"/>
-    <circle cx="300" cy="50" r="10" fill="#0a0a0a"/>
-    <circle cx="550" cy="50" r="14" fill="#0a0a0a"/>
-    <circle cx="50" cy="290" r="14" fill="#0a0a0a"/>
-    <circle cx="300" cy="290" r="10" fill="#0a0a0a"/>
-    <circle cx="550" cy="290" r="14" fill="#0a0a0a"/>
-    <!-- cue ball -->
-    <circle class="ball-cue" cx="160" cy="170" r="11" fill="#F5F5F0"/>
-    <!-- pyramid setup -->
-    <circle class="ball b1" cx="400" cy="170" r="11" fill="#E8C97A"/>
-    <circle class="ball b2" cx="422" cy="158" r="11" fill="#C9A84C"/>
-    <circle class="ball b3" cx="422" cy="182" r="11" fill="#8A6E32"/>
-    <circle class="ball b4" cx="444" cy="147" r="11" fill="#E8C97A" opacity="0.8"/>
-    <circle class="ball b5" cx="444" cy="170" r="11" fill="#C9A84C" opacity="0.9"/>
-    <circle class="ball b6" cx="444" cy="193" r="11" fill="#8A6E32" opacity="0.8"/>
-    <!-- cue stick -->
-    <line class="cue-stick" x1="60" y1="170" x2="148" y2="170" stroke="#C9A84C" stroke-width="3" stroke-linecap="round"/>
-    <!-- aim line -->
-    <line class="aim-line" x1="172" y1="170" x2="388" y2="170" stroke="#C9A84C" stroke-width="1" stroke-dasharray="6 8" opacity="0.4"/>
-  </svg>
-
-  <div class="hero-content" data-animate="hero">
-    <p class="hero-eyebrow">Більярдний клуб · Кременчук</p>
-    <h1>Мистецтво<br>точного <em>удару</em></h1>
-    <p class="hero-sub">Руська піраміда та американський пул у серці Кременчука. Преміальне обладнання, атмосфера справжнього клубу.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#booking">Забронювати стіл</a>
-      <a class="btn-ghost" href="#prices">Переглянути ціни</a>
+<section id="hero">
+  <div class="hero-bg-lights">
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+  </div>
+  <div class="hero-content" data-animate="fade-up">
+    <div class="hero-sub">Більярдний клуб у Кременчуці</div>
+    <h1>Елітна гра <br>для <em>справжніх</em> поціновувачів</h1>
+    <p>Професійні столи для руської піраміди та динамічного пулу в атмосфері затишку, спокою та бездоганного сервісу.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#contacts">
+        <span class="btn-text">Забронювати стіл</span>
+      </a>
+      <a class="btn-secondary" href="#hall">Карта залу</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat" data-animate="stat">
-        <div class="stat-num" data-count="10">0</div>
-        <div class="stat-label">Столів</div>
-      </div>
-      <div class="stat" data-animate="stat">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Ігри</div>
-      </div>
-      <div class="stat" data-animate="stat">
-        <div class="stat-num" data-count="8">0</div>
-        <div class="stat-label">Років досвіду</div>
-      </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('prices').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
     </div>
+    <span>Гортайте вниз</span>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- PRICES -->
 <section id="prices">
-  <div class="section-eyebrow" data-animate="fade-up">Прайс-лист</div>
-  <h2 data-animate="fade-up">Ціни на <em>ігрові столи</em></h2>
-
-  <div class="tables-grid" data-animate="stagger">
-
-    <div class="table-card" data-animate-item>
-      <div class="table-badge">Руська піраміда</div>
-      <div class="table-name">Стандарт</div>
-      <div class="table-type-icon">
-        <svg viewBox="0 0 60 36" fill="none">
-          <rect x="2" y="2" width="56" height="32" rx="4" stroke="#C9A84C" stroke-width="1.5"/>
-          <circle cx="10" cy="8" r="3" fill="#C9A84C" opacity="0.4"/>
-          <circle cx="50" cy="8" r="3" fill="#C9A84C" opacity="0.4"/>
-          <circle cx="10" cy="28" r="3" fill="#C9A84C" opacity="0.4"/>
-          <circle cx="50" cy="28" r="3" fill="#C9A84C" opacity="0.4"/>
-          <circle cx="30" cy="8" r="2.5" fill="#C9A84C" opacity="0.3"/>
-          <circle cx="30" cy="28" r="2.5" fill="#C9A84C" opacity="0.3"/>
-          <circle cx="30" cy="18" r="5" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Пн–Пт · 10:00–21:00</span>
-        <span class="price-value">200<span>грн/год</span></span>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Сб–Нд · 12:00–22:00</span>
-        <span class="price-value">240<span>грн/год</span></span>
+  <div class="section-eyebrow" data-animate="fade-up">Послуги клубу</div>
+  <h2 data-animate="fade-up">Наші <em>столи</em> & ціни</h2>
+  
+  <div class="tables-grid">
+    <div class="table-card" data-animate="fade-right">
+      <div class="card-tag">Популярно</div>
+      <div class="card-img-holder img-pyramid"></div>
+      <div class="card-body">
+        <h3>Руська Піраміда</h3>
+        <p class="card-desc">Класичні масивні столи з професійним сукном Iwan Simonis. Ідеальна геометрія бортів та строгі лузи для справжньої спортивної гри.</p>
+        <div class="card-specs">
+          <div class="spec-item"><span>Розміри:</span> <strong>12 футів</strong></div>
+          <div class="spec-item"><span>Кількість:</span> <strong>4 столи</strong></div>
+        </div>
+        <div class="card-price-row">
+          <span class="price-label">Вартість</span>
+          <div class="price-val">200 <span>грн/год</span></div>
+        </div>
+        <a class="btn-primary card-btn" href="#contacts">Обрати стіл</a>
       </div>
     </div>
 
-    <div class="table-card featured" data-animate-item>
-      <div class="table-badge">Руська піраміда</div>
-      <div class="table-name">VIP-зал</div>
-      <div class="vip-crown">
-        <svg viewBox="0 0 40 24" fill="none">
-          <path d="M4 20 L8 8 L20 16 L32 4 L36 20 Z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round" fill="rgba(201,168,76,0.1)"/>
-        </svg>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Пн–Пт · 10:00–21:00</span>
-        <span class="price-value">280<span>грн/год</span></span>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Сб–Нд · 12:00–22:00</span>
-        <span class="price-value">320<span>грн/год</span></span>
-      </div>
-    </div>
-
-    <div class="table-card" data-animate-item>
-      <div class="table-badge">Американка</div>
-      <div class="table-name">Американський пул</div>
-      <div class="table-type-icon">
-        <svg viewBox="0 0 60 36" fill="none">
-          <rect x="2" y="2" width="56" height="32" rx="4" stroke="#5ABACA" stroke-width="1.5"/>
-          <circle cx="10" cy="8" r="3" fill="#5ABACA" opacity="0.4"/>
-          <circle cx="50" cy="8" r="3" fill="#5ABACA" opacity="0.4"/>
-          <circle cx="10" cy="28" r="3" fill="#5ABACA" opacity="0.4"/>
-          <circle cx="50" cy="28" r="3" fill="#5ABACA" opacity="0.4"/>
-          <circle cx="30" cy="8" r="2.5" fill="#5ABACA" opacity="0.3"/>
-          <circle cx="30" cy="28" r="2.5" fill="#5ABACA" opacity="0.3"/>
-          <circle cx="18" cy="18" r="4" fill="#5ABACA" opacity="0.3"/>
-          <circle cx="28" cy="14" r="4" fill="#5ABACA" opacity="0.3"/>
-          <circle cx="28" cy="22" r="4" fill="#5ABACA" opacity="0.3"/>
-        </svg>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Пн–Пт · 10:00–21:00</span>
-        <span class="price-value">180<span>грн/год</span></span>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Сб–Нд · 12:00–22:00</span>
-        <span class="price-value">220<span>грн/год</span></span>
+    <div class="table-card" data-animate="fade-left">
+      <div class="card-img-holder img-pool"></div>
+      <div class="card-body">
+        <h3>Американський Пул</h3>
+        <p class="card-desc">Динамічна, яскрава та швидка гра. Столи з чудовим розкочуванням куль, які підійдуть як для відпочинку з друзями, так і для відточування складних серій.</p>
+        <div class="card-specs">
+          <div class="spec-item"><span>Розміри:</span> <strong>9 футів</strong></div>
+          <div class="spec-item"><span>Кількість:</span> <strong>2 столи</strong></div>
+        </div>
+        <div class="card-price-row">
+          <span class="price-label">Вартість</span>
+          <div class="price-val">150 <span>грн/год</span></div>
+        </div>
+        <a class="btn-primary card-btn" href="#contacts">Обрати стіл</a>
       </div>
     </div>
-
-    <div class="table-card" data-animate-item>
-      <div class="table-badge">Американка VIP</div>
-      <div class="table-name">Пул — VIP стіл</div>
-      <div class="vip-crown">
-        <svg viewBox="0 0 40 24" fill="none">
-          <path d="M4 20 L8 8 L20 16 L32 4 L36 20 Z" stroke="#5ABACA" stroke-width="1.5" stroke-linejoin="round" fill="rgba(90,186,202,0.1)"/>
-        </svg>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Пн–Пт · 10:00–21:00</span>
-        <span class="price-value">240<span>грн/год</span></span>
-      </div>
-      <div class="price-row">
-        <span class="price-time">Сб–Нд · 12:00–22:00</span>
-        <span class="price-value">280<span>грн/год</span></span>
-      </div>
-    </div>
-
   </div>
-
-  <p class="prices-note" data-animate="fade-up">* Уточнюйте актуальні ціни за телефоном. Можлива знижка при тривалій грі.</p>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- HALL MAP -->
 <section id="hall">
   <div class="section-eyebrow" data-animate="fade-up">Планування залу</div>
   <h2 data-animate="fade-up">Карта <em>клубу</em></h2>
@@ -209,114 +97,41 @@
   <div class="hall-section">
     <div class="hall-map-wrap" data-animate="fade-left">
       <svg class="hall-map-svg" viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
-        <!-- Background -->
         <rect width="520" height="380" fill="#0f1011"/>
-        <!-- Outer walls -->
         <rect x="14" y="14" width="492" height="352" rx="4" fill="none" stroke="#252527" stroke-width="2"/>
 
-        <!-- Entrance -->
-        <rect x="220" y="14" width="80" height="6" fill="#0f1011"/>
-        <text x="260" y="28" text-anchor="middle" fill="#5A5650" font-size="9" font-family="Inter" letter-spacing="2">ВХІД</text>
+        <rect x="40" y="40" width="45" height="55" rx="2" fill="#001020" stroke="#3A6A9A" stroke-width="1.5"/>
+        <text x="62.5" y="73" text-anchor="middle" fill="#5A8ACA" font-size="12" font-family="Inter" font-weight="600">A1</text>
 
-        <!-- ===== РУСЬКА ПІРАМІДА ZONE ===== -->
-        <rect x="24" y="40" width="250" height="160" rx="3" fill="#111512" stroke="#1f3a22" stroke-width="1"/>
-        <text x="149" y="56" text-anchor="middle" fill="#3a6a3e" font-size="8" font-family="Inter" letter-spacing="2">РУСЬКА ПІРАМІДА</text>
+        <rect x="80" y="140" width="65" height="45" rx="2" fill="#001020" stroke="#3A6A9A" stroke-width="1.5"/>
+        <text x="112.5" y="167.5" text-anchor="middle" fill="#5A8ACA" font-size="12" font-family="Inter" font-weight="600">A2</text>
 
-        <!-- Table 1 -->
-        <rect x="36" y="65" width="68" height="38" rx="3" fill="#162518" stroke="#2a6e2e" stroke-width="1"/>
-        <circle cx="70" cy="84" r="6" fill="none" stroke="#3a8e3e" stroke-width="0.8"/>
-        <text x="70" y="88" text-anchor="middle" fill="#5CAA60" font-size="9" font-family="Inter" font-weight="500">1</text>
+        <rect x="180" y="30" width="45" height="70" rx="2" fill="#162518" stroke="#2a6e2e" stroke-width="1.5"/>
+        <text x="202.5" y="70" text-anchor="middle" fill="#5CAA60" font-size="12" font-family="Inter" font-weight="600">R1</text>
 
-        <!-- Table 2 -->
-        <rect x="116" y="65" width="68" height="38" rx="3" fill="#162518" stroke="#2a6e2e" stroke-width="1"/>
-        <circle cx="150" cy="84" r="6" fill="none" stroke="#3a8e3e" stroke-width="0.8"/>
-        <text x="150" y="88" text-anchor="middle" fill="#5CAA60" font-size="9" font-family="Inter" font-weight="500">2</text>
+        <rect x="260" y="30" width="60" height="75" rx="2" fill="#162518" stroke="#2a6e2e" stroke-width="1.5"/>
+        <text x="290" y="73" text-anchor="middle" fill="#5CAA60" font-size="12" font-family="Inter" font-weight="600">R2</text>
 
-        <!-- Table 3 -->
-        <rect x="196" y="65" width="68" height="38" rx="3" fill="#162518" stroke="#2a6e2e" stroke-width="1"/>
-        <circle cx="230" cy="84" r="6" fill="none" stroke="#3a8e3e" stroke-width="0.8"/>
-        <text x="230" y="88" text-anchor="middle" fill="#5CAA60" font-size="9" font-family="Inter" font-weight="500">3</text>
+        <rect x="185" y="130" width="40" height="55" rx="2" fill="#162518" stroke="#2a6e2e" stroke-width="1.5"/>
+        <text x="205" y="163" text-anchor="middle" fill="#5CAA60" font-size="12" font-family="Inter" font-weight="600">R3</text>
 
-        <!-- Table 4 -->
-        <rect x="36" y="118" width="68" height="38" rx="3" fill="#162518" stroke="#2a6e2e" stroke-width="1"/>
-        <circle cx="70" cy="137" r="6" fill="none" stroke="#3a8e3e" stroke-width="0.8"/>
-        <text x="70" y="141" text-anchor="middle" fill="#5CAA60" font-size="9" font-family="Inter" font-weight="500">4</text>
+        <rect x="260" y="145" width="75" height="40" rx="2" fill="#162518" stroke="#2a6e2e" stroke-width="1.5"/>
+        <text x="297.5" y="169" text-anchor="middle" fill="#5CAA60" font-size="12" font-family="Inter" font-weight="600">R4</text>
 
-        <!-- Table 5 -->
-        <rect x="116" y="118" width="68" height="38" rx="3" fill="#162518" stroke="#2a6e2e" stroke-width="1"/>
-        <circle cx="150" cy="137" r="6" fill="none" stroke="#3a8e3e" stroke-width="0.8"/>
-        <text x="150" y="141" text-anchor="middle" fill="#5CAA60" font-size="9" font-family="Inter" font-weight="500">5</text>
+        <rect x="160" y="240" width="110" height="35" rx="3" fill="#140a00" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="215" y="262" text-anchor="middle" fill="#C9A84C" font-size="10" font-family="Inter" font-weight="600" letter-spacing="1">RECEP</text>
 
-        <!-- Table 6 -->
-        <rect x="196" y="118" width="68" height="38" rx="3" fill="#162518" stroke="#2a6e2e" stroke-width="1"/>
-        <circle cx="230" cy="137" r="6" fill="none" stroke="#3a8e3e" stroke-width="0.8"/>
-        <text x="230" y="141" text-anchor="middle" fill="#5CAA60" font-size="9" font-family="Inter" font-weight="500">6</text>
+        <rect x="340" y="280" width="80" height="60" fill="#111214" stroke="#444" stroke-width="1.5"/>
+        <text x="380" y="315" text-anchor="middle" fill="#9B9690" font-size="11" font-family="Inter" font-weight="500">WC ♂</text>
 
-        <!-- ===== VIP ПІРАМІДА ===== -->
-        <rect x="284" y="40" width="222" height="160" rx="3" fill="#140e00" stroke="#C9A84C" stroke-width="1.2"/>
-        <text x="395" y="56" text-anchor="middle" fill="#8A6E32" font-size="8" font-family="Inter" letter-spacing="2">VIP · ПІРАМІДА</text>
+        <rect x="420" y="280" width="80" height="60" fill="#111214" stroke="#444" stroke-width="1.5"/>
+        <text x="460" y="315" text-anchor="middle" fill="#9B9690" font-size="11" font-family="Inter" font-weight="500">WC ♀</text>
 
-        <!-- Table 7 VIP -->
-        <rect x="296" y="65" width="80" height="46" rx="3" fill="#1e1600" stroke="#C9A84C" stroke-width="1"/>
-        <circle cx="336" cy="88" r="7" fill="none" stroke="#C9A84C" stroke-width="0.8"/>
-        <text x="336" y="92" text-anchor="middle" fill="#C9A84C" font-size="10" font-family="Inter" font-weight="600">7</text>
+        <rect x="40" y="355" width="12" height="8" rx="1" fill="#162518" stroke="#2a6e2e"/>
+        <text x="58" y="363" fill="#9B9690" font-size="9" font-family="Inter">Руський більярд (R)</text>
 
-        <!-- Table 8 VIP -->
-        <rect x="390" y="65" width="80" height="46" rx="3" fill="#1e1600" stroke="#C9A84C" stroke-width="1"/>
-        <circle cx="430" cy="88" r="7" fill="none" stroke="#C9A84C" stroke-width="0.8"/>
-        <text x="430" y="92" text-anchor="middle" fill="#C9A84C" font-size="10" font-family="Inter" font-weight="600">8</text>
-
-        <!-- Table 9 VIP -->
-        <rect x="296" y="124" width="80" height="46" rx="3" fill="#1e1600" stroke="#C9A84C" stroke-width="1"/>
-        <circle cx="336" cy="147" r="7" fill="none" stroke="#C9A84C" stroke-width="0.8"/>
-        <text x="336" y="151" text-anchor="middle" fill="#C9A84C" font-size="10" font-family="Inter" font-weight="600">9</text>
-
-        <!-- Table 10 VIP -->
-        <rect x="390" y="124" width="80" height="46" rx="3" fill="#1e1600" stroke="#C9A84C" stroke-width="1"/>
-        <circle cx="430" cy="147" r="7" fill="none" stroke="#C9A84C" stroke-width="0.8"/>
-        <text x="430" y="151" text-anchor="middle" fill="#C9A84C" font-size="10" font-family="Inter" font-weight="600">10</text>
-
-        <!-- ===== АМЕРИКАНКА ZONE ===== -->
-        <rect x="24" y="214" width="250" height="110" rx="3" fill="#00111a" stroke="#1f3a5a" stroke-width="1"/>
-        <text x="149" y="230" text-anchor="middle" fill="#2a5a8a" font-size="8" font-family="Inter" letter-spacing="2">АМЕРИКАНКА (ПУЛ)</text>
-
-        <!-- Pool Table 1 -->
-        <rect x="36" y="238" width="78" height="44" rx="3" fill="#001020" stroke="#3A6A9A" stroke-width="1"/>
-        <ellipse cx="75" cy="260" rx="7" ry="5" fill="none" stroke="#5A8ACA" stroke-width="0.8"/>
-        <text x="75" y="264" text-anchor="middle" fill="#5A8ACA" font-size="9" font-family="Inter" font-weight="500">A1</text>
-
-        <!-- Pool Table 2 -->
-        <rect x="128" y="238" width="78" height="44" rx="3" fill="#001020" stroke="#3A6A9A" stroke-width="1"/>
-        <ellipse cx="167" cy="260" rx="7" ry="5" fill="none" stroke="#5A8ACA" stroke-width="0.8"/>
-        <text x="167" y="264" text-anchor="middle" fill="#5A8ACA" font-size="9" font-family="Inter" font-weight="500">A2</text>
-
-        <!-- ===== VIP АМЕРИКАНКА ===== -->
-        <rect x="284" y="214" width="222" height="110" rx="3" fill="#001218" stroke="#4A9AAA" stroke-width="1.2"/>
-        <text x="395" y="230" text-anchor="middle" fill="#3A7A8A" font-size="8" font-family="Inter" letter-spacing="2">VIP · АМЕРИКАНКА</text>
-
-        <!-- Pool VIP A3 -->
-        <rect x="296" y="238" width="90" height="50" rx="3" fill="#001820" stroke="#5ABACA" stroke-width="1"/>
-        <ellipse cx="341" cy="263" rx="9" ry="6" fill="none" stroke="#5ABACA" stroke-width="0.8"/>
-        <text x="341" y="267" text-anchor="middle" fill="#5ABACA" font-size="10" font-family="Inter" font-weight="600">A3</text>
-
-        <!-- Pool VIP A4 -->
-        <rect x="400" y="238" width="90" height="50" rx="3" fill="#001820" stroke="#5ABACA" stroke-width="1"/>
-        <ellipse cx="445" cy="263" rx="9" ry="6" fill="none" stroke="#5ABACA" stroke-width="0.8"/>
-        <text x="445" y="267" text-anchor="middle" fill="#5ABACA" font-size="10" font-family="Inter" font-weight="600">A4</text>
-
-        <!-- ===== BAR ===== -->
-        <rect x="24" y="336" width="492" height="22" rx="3" fill="#140a00" stroke="#6A4A2A" stroke-width="0.8"/>
-        <text x="270" y="351" text-anchor="middle" fill="#6A4A2A" font-size="9" font-family="Inter" letter-spacing="2">БАР / РЕЦЕПЦІЯ</text>
-
-        <!-- Legend -->
-        <rect x="24" y="362" width="10" height="7" rx="1" fill="#162518" stroke="#2a6e2e"/>
-        <text x="38" y="370" fill="#5A5650" font-size="8" font-family="Inter">Піраміда</text>
-        <rect x="110" y="362" width="10" height="7" rx="1" fill="#140e00" stroke="#C9A84C"/>
-        <text x="124" y="370" fill="#5A5650" font-size="8" font-family="Inter">VIP Піраміда</text>
-        <rect x="224" y="362" width="10" height="7" rx="1" fill="#001020" stroke="#3A6A9A"/>
-        <text x="238" y="370" fill="#5A5650" font-size="8" font-family="Inter">Американка</text>
-        <rect x="336" y="362" width="10" height="7" rx="1" fill="#001820" stroke="#5ABACA"/>
-        <text x="350" y="370" fill="#5A5650" font-size="8" font-family="Inter">VIP Американка</text>
+        <rect x="190" y="355" width="12" height="8" rx="1" fill="#001020" stroke="#3A6A9A"/>
+        <text x="208" y="363" fill="#9B9690" font-size="9" font-family="Inter">Американка (A)</text>
       </svg>
     </div>
 
@@ -327,36 +142,29 @@
         <li>
           <div class="hall-dot" style="background:#5CAA60;"></div>
           <div>
-            <div class="hall-list-title">Піраміда — Столи 1–6</div>
-            <div class="hall-list-sub">Руська піраміда, 12ft. Сукно Iwan Simonis, рейкова підвіска. Комфортна зона.</div>
-          </div>
-        </li>
-        <li>
-          <div class="hall-dot" style="background:#C9A84C;"></div>
-          <div>
-            <div class="hall-list-title">VIP Піраміда — Столи 7–10</div>
-            <div class="hall-list-sub">Ізольована зона преміум-класу. Приглушене освітлення, персональне обслуговування.</div>
+            <div class="hall-list-title">Руський більярд (R) — 4 столи</div>
+            <div class="hall-list-sub">Класичні столи для спортивної піраміди. Якісне сукно та професійні плити для точних ударів.</div>
           </div>
         </li>
         <li>
           <div class="hall-dot" style="background:#5A8ACA;"></div>
           <div>
-            <div class="hall-list-title">Американка — Столи A1–A2</div>
-            <div class="hall-list-sub">Американський пул 8ft. Класичні столи з якісним покриттям.</div>
+            <div class="hall-list-title">Американський пул (A) — 2 столи</div>
+            <div class="hall-list-sub">Динамічна американка. Комфортне розташування столів для невимушеної гри в компанії.</div>
           </div>
         </li>
         <li>
-          <div class="hall-dot" style="background:#5ABACA;"></div>
+          <div class="hall-dot" style="background:#C9A84C;"></div>
           <div>
-            <div class="hall-list-title">VIP Американка — Столи A3–A4</div>
-            <div class="hall-list-sub">Пул 9ft у VIP-зоні. Для справжніх цінителів американської гри.</div>
+            <div class="hall-list-title">Рецепція</div>
+            <div class="hall-list-sub">Зустріч гостей, бронювання часу, замовлення напоїв та розрахунок.</div>
           </div>
         </li>
         <li>
-          <div class="hall-dot" style="background:#6A4A2A;"></div>
+          <div class="hall-dot" style="background:#444444;"></div>
           <div>
-            <div class="hall-list-title">Бар / Рецепція</div>
-            <div class="hall-list-sub">Широкий вибір напоїв, снеків. Бронювання та розрахунок прямо на рецепції.</div>
+            <div class="hall-list-title">Зона зручностей</div>
+            <div class="hall-list-sub">Окремі чисті туалетні кімнати (WC) для чоловіків та жінок у кінці залу.</div>
           </div>
         </li>
       </ul>
@@ -364,110 +172,49 @@
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- BOOKING BAND -->
-<div class="booking-band" id="booking">
-  <div class="booking-bg-glow"></div>
-  <div class="section-eyebrow centered" data-animate="fade-up">Резервація столу</div>
-  <h2 data-animate="fade-up">Заброньовуйте стіл<br>просто зараз</h2>
-  <p data-animate="fade-up">Дзвоніть або пишіть — підберемо зручний час і підготуємо стіл до вашого приходу</p>
-  <a class="phone-link" href="tel:+380XXXXXXXXX" data-animate="fade-up">+38 (0XX) XXX-XX-XX</a>
-  <div class="booking-actions" data-animate="fade-up">
-    <a class="btn-primary" href="tel:+380XXXXXXXXX">Зателефонувати</a>
-    <a class="btn-ghost" href="#contacts">Написати нам</a>
-  </div>
-</div>
-
-<!-- CONTACTS -->
 <section id="contacts">
-  <div class="section-eyebrow" data-animate="fade-up">Як нас знайти</div>
-  <h2 data-animate="fade-up">Контакти та <em>графік роботи</em></h2>
+  <div class="section-eyebrow" data-animate="fade-up">Бронювання</div>
+  <h2 data-animate="fade-up">Чекаємо на <em>вас</em></h2>
 
   <div class="contacts-grid">
-    <div class="contact-block" data-animate="fade-left">
-      <h3>Де ми знаходимось</h3>
-
-      <div class="contact-row">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
-        </svg>
-        <div>
-          <div class="contact-label">Адреса</div>
-          <div class="contact-value">м. Кременчук, вул. [Ваша адреса]</div>
-        </div>
+    <div class="contacts-info" data-animate="fade-right">
+      <div class="info-card">
+        <h3>Графік роботи</h3>
+        <p>Понеділок — П'ятниця: <strong>10:00 – 21:00</strong></p>
+        <p>Субота — Неділя: <strong>12:00 – 22:00</strong></p>
+      </div>
+      
+      <div class="info-card">
+        <h3>Контакти клубу</h3>
+        <p>Телефон: <a href="tel:+380970000000" class="gold-link">+38 (097) 000-00-00</a></p>
+        <p>Локація: <span>м. Кременчук</span></p>
       </div>
 
-      <div class="contact-row">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
-        </svg>
-        <div>
-          <div class="contact-label">Телефон</div>
-          <div class="contact-value"><a href="tel:+380XXXXXXXXX">+38 (0XX) XXX-XX-XX</a></div>
-        </div>
-      </div>
-
-      <div class="contact-row">
-        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
-        </svg>
-        <div>
-          <div class="contact-label">Email</div>
-          <div class="contact-value"><a href="mailto:viktoria@billiard.kr.ua">viktoria@billiard.kr.ua</a></div>
-        </div>
-      </div>
-
-      <!-- GOOGLE MAP -->
-      <div class="map-container" id="map-container">
-        <iframe
-          src="https://www.google.com/maps?q=%D0%9A%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D1%87%D1%83%D0%BA%2C%20%D0%B2%D1%83%D0%BB.%20%D0%92%D0%B0%D1%88%D0%B0%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0&output=embed"
-          width="100%"
-          height="260"
-          style="border:0; filter: grayscale(60%) invert(5%) contrast(1.1);"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Клуб Вікторія на карті">
-        </iframe>
+      <div class="info-card">
+        <h3>Про правила клубу</h3>
+        <p class="text-secondary" style="font-size:0.95rem; line-height:1.5;">Ми піклуємось про якість обладнання, тому просимо гостей дотримуватись чистоти, не ставити напої на сукно столів та поважати комфорт інших гравців залу.</p>
       </div>
     </div>
 
-    <div class="contact-block" data-animate="fade-right">
-      <h3>Графік роботи</h3>
-      <table class="hours-table">
-        <tr class="hours-row">
-          <td>Понеділок — П'ятниця</td>
-          <td class="hours-time">10:00 — 21:00</td>
-        </tr>
-        <tr class="hours-row">
-          <td>Субота — Неділя</td>
-          <td class="hours-time">12:00 — 22:00</td>
-        </tr>
-        <tr class="hours-row open-now" id="open-status-row">
-          <td id="open-label">Зараз</td>
-          <td class="hours-time" id="open-status">—</td>
-        </tr>
-      </table>
-
-      <!-- CONTACT FORM
-           Щоб повідомлення реально приходили на вашу пошту:
-           1. Зареєструйтесь безкоштовно на https://formspree.io
-           2. Створіть форму, підтвердіть свою email-адресу
-           3. Замініть YOUR_FORM_ID нижче (в атрибуті action) на ID вашої форми
-           Детальна інструкція — у README.md
-      -->
-      <div class="contact-form-wrap">
-        <div class="form-title">Написати нам</div>
-        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <div class="form-group">
-            <input type="text" name="name" placeholder="Ваше ім'я" required class="form-input" autocomplete="name">
+    <div class="contacts-form-wrap" data-animate="fade-left">
+      <div class="form-box">
+        <h3>Онлайн-запит на стіл</h3>
+        <span class="gold-line"></span>
+        
+        <form class="contacts-form" action="https://formspree.io/f/xvznwoeb" method="POST" id="booking-form">
+          <div class="form-row-2">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Ваше ім'я" class="form-input" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Ваш Email" class="form-input" required autocomplete="email">
+            </div>
           </div>
           <div class="form-group">
-            <input type="tel" name="phone" placeholder="Номер телефону" required class="form-input" autocomplete="tel">
+            <input type="tel" name="phone" placeholder="Телефон для зв'язку" class="form-input" required autocomplete="tel">
           </div>
           <div class="form-group">
-            <textarea name="message" placeholder="Повідомлення" rows="4" class="form-input form-textarea" required></textarea>
+            <textarea name="message" placeholder="Який стіл та час вас цікавлять?" rows="4" class="form-input form-textarea" required></textarea>
           </div>
           <div class="form-group">
             <input type="text" name="_gotcha" style="display:none">
@@ -488,7 +235,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <a class="footer-logo" href="#">
@@ -500,10 +246,8 @@
       <a href="#contacts">Контакти</a>
     </div>
     <div class="footer-schedule">
-      <span>🕐 Пн–Пт: 10:00–21:00</span>
-      <span>🕐 Сб–Нд: 12:00–22:00</span>
+      <span>💖 Більярдний клуб «Вікторія»</span>
     </div>
-    <p class="footer-copy">© 2026 Більярдний клуб «Вікторія» · м. Кременчук</p>
   </div>
 </footer>
 
